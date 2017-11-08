@@ -21,11 +21,24 @@ module.exports = {
                 requestOptions: newOption
             };
         }
+	if (req.requestOptions.hostname == "version.jr.moefantasy.com"){
+	    return null ;
+	}
         if (req.protocol == 'https') {
             // intercept every https request to prevent potentional mallicious abuse.
             return badResponse
         }
         return badResponse
     },
+    *beforeSendResponse (req, res) {
+	var newResponse = Object.assign({}, res.response);
+	console.log(res)
+	if (req.requestOptions.hostname == "version.jr.moefantasy.com" && req.requestOptions.path.indexOf("index/checkVer")!=-1){
+	    newResponse.body = newResponse.body.replace("\"cheatsCheck\":0", "\"cheatsCheck\":1");
+	}
+	return {
+	    response:newResponse
+	}
+    }
 };
 
