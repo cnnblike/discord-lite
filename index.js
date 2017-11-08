@@ -1,4 +1,4 @@
-const proxy = require("anyproxy");
+let AnyProxy = require("anyproxy");
 const Koa = require('koa')
 const path = require('path')
 const static = require('koa-static')
@@ -13,14 +13,18 @@ app.listen(3000, ()=>{
     console.log('PACFile serving at port 3000')
 });
 
-!proxy.isRootCAFileExists() && proxy.generateRootCA();
 var options = {
         type : "http",
-        port : 8081,
+        port : 80,
         hostname: "discord.cnnblike.com",
         rule : require('./rule.js'),
         disableWebInterface: true,
         setAsGlobalProxy: false,
-        silent: false
+        silent: false,
+forceProxyHttps: true
 }
-new proxy.proxyServer(options);
+const proxyServer = new AnyProxy.ProxyServer(options);
+
+proxyServer.on('ready', () => { /* */ });
+proxyServer.on('error', (e) => { /* */ });
+proxyServer.start();
