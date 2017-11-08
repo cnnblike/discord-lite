@@ -17,8 +17,6 @@ module.exports = {
 	    var newOption = Object.assign({},req.requestOptions);
             newOption.hostname = "login.jr.moefantasy.com";
             newOption.headers.Host = "login.jr.moefantasy.com";
-	    console.log(req)
-	    console.log(newOption)
             return {
                 requestOptions: newOption
             };
