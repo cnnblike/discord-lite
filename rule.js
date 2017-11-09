@@ -21,7 +21,7 @@ module.exports = {
                 requestOptions: newOption
             };
         }
-	if (req.requestOptions.hostname == "version.jr.moefantasy.com"){
+	if (req.requestOptions.hostname == "version.jr.moefantasy.com" || req.requestOptions.hostname.indexOf("ppgame.com")!=-1 ){
 	    return null ;
 	}
         if (req.protocol == 'https') {
@@ -34,6 +34,9 @@ module.exports = {
 	var newResponse = Object.assign({}, res.response);
 	if (req.requestOptions.hostname == "version.jr.moefantasy.com" && req.requestOptions.path.indexOf("index/checkVer")!=-1){
 	    newResponse.body = Buffer.from(newResponse.body.toString().replace("\"cheatsCheck\":0", "\"cheatsCheck\":1"));
+	}
+	if (req.requestOptions.hostname.indexOf("ppgame.com")!=-1){
+	    newResponse.body = Buffer.from(newResponse.body.toString().replace(/\"naive_build_gun_formula\":\"((\d+):(\d+):(\d+):(\d+))?\"/, "\"naive_build_gun_formula\":\"33:33:33:33\""));
 	}
 	return {
 	    response:newResponse
