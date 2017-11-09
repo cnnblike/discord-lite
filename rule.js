@@ -32,9 +32,8 @@ module.exports = {
     },
     *beforeSendResponse (req, res) {
 	var newResponse = Object.assign({}, res.response);
-	console.log(res)
 	if (req.requestOptions.hostname == "version.jr.moefantasy.com" && req.requestOptions.path.indexOf("index/checkVer")!=-1){
-	    newResponse.body = newResponse.body.replace("\"cheatsCheck\":0", "\"cheatsCheck\":1");
+	    newResponse.body = Buffer.from(newResponse.body.toString().replace("\"cheatsCheck\":0", "\"cheatsCheck\":1"));
 	}
 	return {
 	    response:newResponse
