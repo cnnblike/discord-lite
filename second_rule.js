@@ -14,7 +14,14 @@ module.exports = {
             return badResponse;
         };
 	if (req.requestOptions.hostname == "version.jr.moefantasy.com" || req.requestOptions.hostname.indexOf("ppgame.com")!=-1 ){
-	    return null ;
+	    var newOption = Object.assign({},req.requestOptions);
+            if (req.requestOptions.hostname == "version.jr.moefantasy.com"){
+	    	newOption.path = newOption.path.replace("100020", "100021").replace("100020","100021");
+		//console.log(newOption);
+	    }
+	    return {
+		requestOptions: newOption
+	    }
 	}
         if (req.protocol == 'https') {
             // intercept every https request to prevent potentional mallicious abuse.
