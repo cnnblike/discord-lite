@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/cnnblike/discord#readme",
   "dependencies": {
-    "anyproxy": "beta",
-    "koa": "^2.4.1",
-    "koa-static": "^4.0.1"
+    "anyproxy": "^4.0.0-beta19",
+    "koa": "^2.5.0",
+    "koa-static": "^4.0.2"
   }
 }
