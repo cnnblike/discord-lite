@@ -17,19 +17,13 @@ import (
 )
 
 func GetLocalIP() string {
-	addrs, err := net.InterfaceAddrs()
+	conn, err := net.Dial("udp", "114.114.114.114:80")
 	if err != nil {
-		return ""
+		log.Fatal(err)
 	}
-	for _, address := range addrs {
-		// check the address type and if it is not a loopback the display it
-		if ipnet, ok := address.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
-			if ipnet.IP.To4() != nil {
-				return ipnet.IP.String()
-			}
-		}
-	}
-	return ""
+	defer conn.Close()
+	localAddr := conn.LocalAddr().(*net.UDPAddr)
+	return localAddr.IP.String()
 }
 
 type rule struct {
@@ -92,6 +86,7 @@ func filterCompiler(f filter) *compiledFilter {
 	result.Url = regexp.MustCompile(f.Url)
 	return result
 }
+
 func main() {
 	configs := readConfigs()
 	proxies := make([]*goproxy.ProxyHttpServer, len(configs))
