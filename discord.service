@@ -5,7 +5,6 @@ Description=discord
 ExecStart=/usr/bin/node /root/discord/index.js
 Restart=always
 User=root
-# Note RHEL/Fedora uses 'nobody', Debian/Ubuntu uses 'nogroup'
 Group=root
 Environment=PATH=/usr/bin:/usr/local/bin
 Environment=NODE_ENV=production

@@ -1,0 +1,20 @@
+{
+    "comment": "for mobile game WarShipGirls, enable you to access Android server on iPhone",
+    "port": 9091,
+    "modifiers": [{
+        "filter": {
+            "host": "^version\\.jr\\.moefantasy\\.com$",
+            "url": "index/checkVer"},
+        "rules": [{
+            "hook": "onRequest",
+            "target": "url",
+            "pattern": "100020",
+            "replacement": "100021"
+        }, {
+            "hook": "onResponse",
+            "target": "body",
+            "pattern": "\"cheatsCheck\":0",
+            "replacement": "\"cheatsCheck\":1"
+        }]
+    }]
+}

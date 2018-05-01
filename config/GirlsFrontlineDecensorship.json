@@ -1,0 +1,15 @@
+{
+    "comment": "decensorship for mobile game GirlsFrontline",
+    "port": 9092,
+    "modifiers": [{
+        "filter": {
+            "host": ".*\\.ppgame\\.com$",
+            "url": "index.php/1000/Index/index$"},
+        "rules": [{
+            "hook": "onResponse",
+            "target": "body",
+            "pattern": "\"naive_build_gun_formula\":\"(\\d+:\\d+:\\d+:\\d+)?\"",
+            "replacement": "\"naive_build_gun_formula\":\"33:33:33:33\""
+        }]
+    }]
+}

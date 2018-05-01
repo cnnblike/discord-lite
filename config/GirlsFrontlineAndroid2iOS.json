@@ -1,0 +1,24 @@
+{
+    "comment": "for mobile game GirlsFroneline, enable you to access iOS server on Android",
+    "port": 9094,
+    "modifiers": [{
+        "filter": {
+            "host": "^adr\\.transit\\.gf\\.ppgame\\.com$",
+            "url": "index.php$"},
+        "rules": [{
+            "hook": "onRequest",
+            "target": "url",
+            "pattern": "adr",
+            "replacement": "ios"
+        }, {
+            "hook": "onRequest",
+            "target": "body",
+            "pattern": "channel=cn_mica", 
+            "replacement": "channel=cn_appstore"
+        }, {
+            "hook": "onRequest",
+            "target": "platformChannelId=GWGW",
+            "replacement": "platformChannelId=ios"
+        }]
+    }]
+}

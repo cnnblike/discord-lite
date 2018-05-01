@@ -1,0 +1,15 @@
+{
+    "comment": "decensorship for mobile game WarShipGirls",
+    "port": 9090,
+    "modifiers": [{
+        "filter": {
+            "host": "^version(\\.channel)?\\.jr\\.moefantasy\\.com$",
+            "url": "index/checkVer"}, 
+        "rules": [{
+            "hook": "onResponse",
+            "target": "body",
+            "pattern": "\"cheatsCheck\":0",
+            "replacement": "\"cheatsCheck\":1"
+        }]
+    }]
+}
