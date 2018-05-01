@@ -2,13 +2,12 @@
 Description=discord
 
 [Service]
-ExecStart=/usr/bin/node /root/discord/index.js
+ExecStart=/root/discord-lite/main server
 Restart=always
 User=root
 Group=root
 Environment=PATH=/usr/bin:/usr/local/bin
-Environment=NODE_ENV=production
-WorkingDirectory=/root/discord
+WorkingDirectory=/root/discord-lite
 
 [Install]
 WantedBy=multi-user.target
