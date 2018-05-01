@@ -113,7 +113,8 @@ func main() {
 					// modify to get new request here.
 					for _, r := range rs {
 						if r.Target == "url" {
-							req.Host = string(regexp.MustCompile(r.Pattern).ReplaceAll([]byte(req.Host), []byte(r.Replacement)))
+							req.URL.Host = string(regexp.MustCompile(r.Pattern).ReplaceAll([]byte(req.URL.Host), []byte(r.Replacement)))
+							req.URL.Path = string(regexp.MustCompile(r.Pattern).ReplaceAll([]byte(req.URL.Path), []byte(r.Replacement)))
 						} else if r.Target == "body" {
 							body, err := ioutil.ReadAll(req.Body)
 							if err == nil {
