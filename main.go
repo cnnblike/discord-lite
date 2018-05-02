@@ -12,6 +12,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/elazarl/goproxy"
 )
@@ -163,8 +164,21 @@ func main() {
 				})
 		}
 		log.Printf("Proxy #%d, address: %s:%d, %s", i, GetLocalIP(), config.Port, config.Comment)
-		go http.ListenAndServe(":"+strconv.Itoa(config.Port), proxies[i])
+		srv := &http.Server{
+			ReadTimeout:  5 * time.Second,
+			WriteTimeout: 10 * time.Second,
+			Addr:         ":" + strconv.Itoa(config.Port),
+			Handler:      proxies[i],
+		}
+		go srv.ListenAndServe()
 	}
-	http.Handle("/", http.FileServer(http.Dir("."+string(filepath.Separator)+"PACFile")))
-	http.ListenAndServe(":3000", nil)
+	mux := http.NewServeMux()
+	mux.Handle("/", http.FileServer(http.Dir("."+string(filepath.Separator)+"PACFile")))
+	srv := &http.Server{
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 10 * time.Second,
+		Addr:         ":3000",
+		Handler:      mux,
+	}
+	srv.ListenAndServe()
 }
