@@ -1,7 +1,7 @@
 function FindProxyForURL(url, host)
 {
-    proxy = "PROXY discord.cnnblike.com:9092";
-    if (shExpMatch(url, "\/index\.php\/(\d{4}?)\/Index\/index") && ((shExpMatch(host,"gf-(adrgw|ios)-cn-zs-game-0001\.ppgame\.com") || shExpMatch(host, "s\d{1,2}\.(gw|ios)\.gf\.game\.com"))))
-        return proxy;
+    if (shExpMatch(host, "gf-*-cn-zs-game-0001.ppgame.com") || shExpMatch(host, "s*.gw.gf.ppgame.com") || shExpMatch(host, "s*,ios.gf.ppgame.com")) 
+        return "PROXY 10.0.0.39:9092";
     return "DIRECT";
 }
+
