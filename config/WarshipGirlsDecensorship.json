@@ -4,12 +4,17 @@
     "modifiers": [{
         "filter": {
             "host": "^version(\\.channel)?\\.jr\\.moefantasy\\.com$",
-            "url": "index/checkVer"}, 
+            "url": "index/checkVer"},
         "rules": [{
             "hook": "onResponse",
             "target": "body",
             "pattern": "\"cheatsCheck\":0",
             "replacement": "\"cheatsCheck\":1"
+        }, {
+            "hook": "onResponse",
+            "target": "body",
+            "pattern": "censor",
+            "replacement": "2"
         }]
     }]
 }
